@@ -4,8 +4,8 @@
 # Models
 ```
 USER	{           // Модель пользователя
-  username	      // username
-  password	      // пароль
+  username	     // username
+  password	     // пароль
   _id	            // id пользователя
 }
 
