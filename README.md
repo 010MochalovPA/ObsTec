@@ -18,7 +18,6 @@ PERSON	{         // Модель Сотрудника
   adress	        // Рабочий адрес
   officeNumber	  // Номер кабинета
   phoneNumber	    // Номер телефона
-  deviceList[]    // Список утройств
   _id	             // id Сотрудника
 }
 
