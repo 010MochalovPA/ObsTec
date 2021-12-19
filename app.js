@@ -1,12 +1,17 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
+const morgan = require("morgan");
 
-const app = express();
 const authRoutes = require("./routes/auth");
 const personRoutes = require("./routes/person");
 const deviceRoutes = require("./routes/device");
 const deviceTypeRoutes = require("./routes/devicetype");
 
+const app = express();
+
+app.use(morgan("dev"));
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
