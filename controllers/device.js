@@ -4,10 +4,10 @@ module.exports.getAll = (request, response) => {
 module.exports.getById = (request, response) => {
   // Получение всех устройств
 };
-module.exports.getByType = (request, response) => {
+module.exports.getByTypeId = (request, response) => {
   // Получить по типу устройства
 };
-module.exports.getByPerson = (request, response) => {
+module.exports.getByPersonId = (request, response) => {
   // Получить по сотруднику
 };
 module.exports.create = (request, response) => {
