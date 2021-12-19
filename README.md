@@ -2,7 +2,7 @@
 Система учета вычислительной техники на express и angular с подключением MongoDB
 
 # Models
-
+```
 USER	{           // Модель пользователя
   username	      // username
   password	      // пароль
@@ -36,3 +36,4 @@ Device	{         // Устройство
   Person	        // id сотрудника
   _id	            // id устройства
 }
+```
