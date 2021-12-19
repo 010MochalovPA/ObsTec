@@ -1,7 +1,9 @@
 # ITAuditTech
+
 Система учета вычислительной техники на express и angular с подключением MongoDB
 
 # Models
+
 ```
 USER	{           // Модель пользователя
   username	     // username
@@ -27,12 +29,12 @@ DEVICETYPE	{     // Тип устройства
 }
 
 Device	{         // Устройство
-  deviceType	    // Тип устройства 
+  deviceTypeId    // Тип устройства
   deviceModel	    // Модель
   serialNumber	  // Cерийный номер
   ipAdress ? 	    // IP
   inventoryNumber	// Инвентарный номер
-  Person	        // id сотрудника
+  PersonId        // id сотрудника
   _id	            // id устройства
 }
 ```
