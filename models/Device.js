@@ -26,6 +26,7 @@ const deviceSchema = new Schema({
   personId: {
     ref: "persons",
     type: Schema.Types.ObjectId,
+    required: false,
   },
 });
 

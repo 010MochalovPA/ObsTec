@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -10,6 +11,14 @@ const deviceTypeRoutes = require("./routes/devicetype");
 
 const app = express();
 
+mongoose
+  .connect(require("./config/keys").mongoURI)
+  .then(() => {
+    console.log("MongoDB connected!");
+  })
+  .catch(error => {
+    console.log(error);
+  });
 app.use(morgan("dev"));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
