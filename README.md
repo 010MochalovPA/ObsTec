@@ -38,3 +38,38 @@ Device	{         // Устройство
   _id	            // id устройства
 }
 ```
+
+# API's
+
+```
+AUTH	{                         // routes/auth
+  /api/login (POST)	            // Запрос логина
+  /api/register (POST)          // Запрос регистрации
+}
+
+PERSON	{                       // routes/person
+  /api/person (GET)	            // Получение всех сотрудников
+  /api/person (POST)	          // Добавление сотрудника
+  /api/person/:id (GET)	        // Получение конкретного сотрудника
+  /api/person/:id (DELETE)	    // Удаление сотрудника
+  /api/person/:id (PATCH)	      // Изменение сотрудника
+}
+
+DEVICETYPE	{                   // routes/devicetype
+  /api/devicetype (GET)	        // Получение всех типов устройств
+  /api/devicetype/:id (GET)	    // Получение конкретного типа
+  /api/devicetype/:id (DELETE)	// Удаление типа (проверить на пустоту)
+  /api/devicetype (POST)	      // Создание типа
+  /api/devicetype/:id (PATCH)	  // Изменение типа
+}
+
+Device	{                         // routes/device
+  /api/device (GET)	              // Получение всех устройств
+  /api/device/:id (GET)	          // Получение конкретного девайса
+  /api/device/:devicetype (GET)	  // Получение устройств по типу
+  /api/device/:person (GET)	      // Получение устройств по сотруднику
+  /api/device (POST)	            // Создание
+  /api/device/:id (PATCH)	        // Изменение
+  /api/device/:id (DELETE)	      // Удаление
+}
+```
