@@ -1,0 +1,25 @@
+{
+  "name": "itaudittech",
+  "version": "1.0.0",
+  "description": "Система учета вычислительной техники на express и angular с подключением MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/010MochalovPA/ITAuditTech.git"
+  },
+  "keywords": [
+    "express",
+    "angular",
+    "nodejs",
+    "mongodb"
+  ],
+  "author": "Pavel Mochalov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/010MochalovPA/ITAuditTech/issues"
+  },
+  "homepage": "https://github.com/010MochalovPA/ITAuditTech#readme"
+}
