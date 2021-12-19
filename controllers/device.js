@@ -1,6 +1,9 @@
 module.exports.getAll = (request, response) => {
   // Получение всех устройств
 };
+module.exports.getById = (request, response) => {
+  // Получение всех устройств
+};
 module.exports.getByType = (request, response) => {
   // Получить по типу устройства
 };

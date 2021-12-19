@@ -5,6 +5,9 @@ const controller = require("../controllers/device");
 //localhost:5000/api/device
 router.get("", controller.getAll);
 
+//localhost:5000/api/device/:id
+router.get("/:id", controller.getById);
+
 //localhost:5000/api/device/:devicetype
 router.get("/:devicetype", controller.getByType);
 
