@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const keys = require("../config/keys");
 
+const errorHandler = require("../utils/errorHandler");
+
 module.exports.login = async (request, response) => {
   // username: String;
   // password: String;
@@ -50,7 +52,7 @@ module.exports.register = async (request, response) => {
       await user.save();
       response.status(201).json(user);
     } catch (error) {
-      //
+      errorHandler(response, error);
     }
   }
 };
