@@ -6,8 +6,7 @@ const deviceTypeSchema = new Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
   },
 });
 
-module.exports = mongoose.model("deviceTypes", deviceTypeSchema);
+module.exports = mongoose.model("devicetypes", deviceTypeSchema);
