@@ -9,6 +9,11 @@ module.exports.login = async (request, response) => {
   // username: String;
   // password: String;
   // expiresIn: String
+  if (request.body.expiresIn) {
+    console.log("yes");
+  }
+  const expiresInTest = request.body.expiresIn ? request.body.expiresIn : 1;
+
   tmpUser = await User.findOne({ username: request.body.username });
   if (tmpUser) {
     const passwordResult = bcript.compareSync(request.body.password, tmpUser.password);
@@ -19,7 +24,7 @@ module.exports.login = async (request, response) => {
           userId: tmpUser._id,
         },
         keys.jwt,
-        { expiresIn: 60 * request.body.expiresIn }
+        { expiresIn: 60 * 60 * expiresInTest }
       ); //expiresIn время жизни токена
 
       response.status(200).json({ token: `Bearer ${token}` });

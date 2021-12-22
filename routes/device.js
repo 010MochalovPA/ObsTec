@@ -10,10 +10,10 @@ router.get("/", passport.authenticate("jwt", { session: false }), controller.get
 router.get("/:id", passport.authenticate("jwt", { session: false }), controller.getById);
 
 //localhost:5000/api/device/:devicetypeId
-router.get("/:devicetypeId", passport.authenticate("jwt", { session: false }), controller.getByTypeId);
+router.get("/devicetype/:deviceTypeId", passport.authenticate("jwt", { session: false }), controller.getByTypeId);
 
 //localhost:5000/api/device/:personId
-router.get("/:personId", passport.authenticate("jwt", { session: false }), controller.getByPersonId);
+// router.get("/:personId", passport.authenticate("jwt", { session: false }), controller.getByPersonId);
 
 //localhost:5000/api/device
 router.post("/", passport.authenticate("jwt", { session: false }), controller.create);

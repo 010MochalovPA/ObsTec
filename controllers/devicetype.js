@@ -2,7 +2,13 @@ const DeviceType = require("../models/DeviceType");
 const errorHandler = require("../utils/errorHandler");
 
 module.exports.getAll = async (request, response) => {
-  response.status(200).json({ getAll: true });
+  // получить все типы устройств
+  try {
+    const devicetypes = await DeviceType.find({});
+    response.status(200).json(devicetypes);
+  } catch (e) {
+    errorHandler(response, e);
+  }
 };
 module.exports.getById = async (request, response) => {
   // Получить тип девайся

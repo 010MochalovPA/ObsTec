@@ -4,8 +4,12 @@ const Schema = mongoose.Schema;
 
 const deviceSchema = new Schema({
   deviceTypeId: {
-    ref: "deviceTypes",
+    ref: "devicetypes",
     type: Schema.Types.ObjectId,
+  },
+  deviceTypeName: {
+    type: String,
+    required: false,
   },
   deviceModel: {
     type: String,
