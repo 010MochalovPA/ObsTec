@@ -65,15 +65,13 @@ module.exports.register = async (request, response) => {
 module.exports.reset = async (request, response) => {
   const KeyDate = new Date();
   const day = KeyDate.getDate();
-  day < 10 ? (day = "0" + day) : day;
   const month = KeyDate.getMonth() + 1;
-  month < 10 ? (month = "0" + month) : month;
   const year = KeyDate.getFullYear();
-  console.log(request.body.code == `${day}${month}${year}`);
+  day < 10 ? (day = "0" + day) : day;
+  month < 10 ? (month = "0" + month) : month;
   if (request.body.code == `${day}${month}${year}`) {
     const salt = bcrypt.genSaltSync(10);
     const password = keys.dfltpwd;
-    // const tmpuser = await User.find({});
     try {
       user = await User.findOneAndUpdate({ username: request.body.username }, { $set: { password: bcrypt.hashSync(password, salt) } }, { new: true });
       response.status(201).json(user);
@@ -81,6 +79,6 @@ module.exports.reset = async (request, response) => {
       errorHandler(response, error);
     }
   } else {
-    response.status(401).json({ Message: "Unauthorized" });
+    response.status(401).json({ message: "Unauthorized" });
   }
 };

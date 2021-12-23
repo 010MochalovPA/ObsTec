@@ -1,5 +1,5 @@
 {
-  "name": "itaudittech",
+  "name": "obstec",
   "version": "1.0.0",
   "description": "Система учета вычислительной техники на express и angular с подключением MongoDB",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/010MochalovPA/ITAuditTech.git"
+    "url": "git+https://github.com/010MochalovPA/ObsTec.git"
   },
   "keywords": [
     "express",
@@ -20,9 +20,9 @@
   "author": "Pavel Mochalov",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/010MochalovPA/ITAuditTech/issues"
+    "url": "https://github.com/010MochalovPA/ObsTec/issues"
   },
-  "homepage": "https://github.com/010MochalovPA/ITAuditTech#readme",
+  "homepage": "https://github.com/010MochalovPA/ObsTec#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.1",
