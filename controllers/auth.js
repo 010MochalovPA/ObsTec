@@ -1,4 +1,4 @@
-const bcript = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const keys = require("../config/keys");
@@ -16,7 +16,7 @@ module.exports.login = async (request, response) => {
 
   tmpUser = await User.findOne({ username: request.body.username });
   if (tmpUser) {
-    const passwordResult = bcript.compareSync(request.body.password, tmpUser.password);
+    const passwordResult = bcrypt.compareSync(request.body.password, tmpUser.password);
     if (passwordResult) {
       const token = jwt.sign(
         {
@@ -59,5 +59,28 @@ module.exports.register = async (request, response) => {
     } catch (error) {
       errorHandler(response, error);
     }
+  }
+};
+
+module.exports.reset = async (request, response) => {
+  const KeyDate = new Date();
+  const day = KeyDate.getDate();
+  day < 10 ? (day = "0" + day) : day;
+  const month = KeyDate.getMonth() + 1;
+  month < 10 ? (month = "0" + month) : month;
+  const year = KeyDate.getFullYear();
+  console.log(request.body.code == `${day}${month}${year}`);
+  if (request.body.code == `${day}${month}${year}`) {
+    const salt = bcrypt.genSaltSync(10);
+    const password = keys.dfltpwd;
+    // const tmpuser = await User.find({});
+    try {
+      user = await User.findOneAndUpdate({ username: request.body.username }, { $set: { password: bcrypt.hashSync(password, salt) } }, { new: true });
+      response.status(201).json(user);
+    } catch (error) {
+      errorHandler(response, error);
+    }
+  } else {
+    response.status(401).json({ Message: "Unauthorized" });
   }
 };
