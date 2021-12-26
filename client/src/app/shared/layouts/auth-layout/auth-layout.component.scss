@@ -1,0 +1,22 @@
+main {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0px;
+}
+.spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  a {
+    margin-left: 15px;
+    &.active-mat-flat-button {
+      background-color: #522e92 !important;
+    }
+    &:not([disabled]) {
+      &:hover {
+        background-color: #3c226a !important;
+      }
+    }
+  }
+}

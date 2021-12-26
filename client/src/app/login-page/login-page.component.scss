@@ -1,0 +1,23 @@
+.mat-form-field {
+  width: 100%;
+  min-width: 360px;
+}
+mat-card {
+  margin-top: 100px;
+  width: 360px;
+}
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+mat-checkbox {
+  margin-bottom: 30px;
+}
+.button {
+  display: flex;
+  justify-content: flex-end;
+  .submit-button {
+    width: 100%;
+  }
+}
