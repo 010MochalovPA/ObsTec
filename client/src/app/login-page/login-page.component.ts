@@ -9,6 +9,7 @@ import {
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { MaterialService } from '../shared/classes/material.service';
 import { AuthService } from '../shared/services/auth.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -39,7 +40,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private materialService: MaterialService
   ) {}
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
@@ -68,7 +70,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         this.router.navigate(['/overview']);
       },
       (error) => {
-        console.log(error.error.message);
+        this.materialService.openSnackBar(error.error.message);
         this.form.enable();
       }
     );
