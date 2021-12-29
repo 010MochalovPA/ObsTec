@@ -9,11 +9,7 @@ module.exports.login = async (request, response) => {
   // username: String;
   // password: String;
   // expiresIn: String
-  if (request.body.expiresIn) {
-    console.log("yes");
-  }
   const expiresInTest = request.body.expiresIn ? request.body.expiresIn : 1;
-
   tmpUser = await User.findOne({ username: request.body.username });
   if (tmpUser) {
     const passwordResult = bcrypt.compareSync(request.body.password, tmpUser.password);
