@@ -46,9 +46,9 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
       if (params['registered']) {
-        // Вы можете войти
+        this.materialService.openSnackBar('Теперь вы можете войти в систему');
       } else if (params['accessDenied']) {
-        // Для начала авторизируйтесь в системе
+        this.materialService.openSnackBar('Доступ запрещен');
       }
     });
   }
