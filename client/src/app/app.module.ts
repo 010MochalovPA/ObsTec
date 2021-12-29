@@ -25,13 +25,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginPageComponent,
-    AuthLayoutComponent,
-    MainLayoutComponent,
-    ResetPageComponent,
-  ],
+  declarations: [AppComponent, LoginPageComponent, AuthLayoutComponent, MainLayoutComponent, ResetPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

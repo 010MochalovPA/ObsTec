@@ -1,11 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormGroupDirective,
-  NgForm,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -13,10 +7,7 @@ import { MaterialService } from '../shared/classes/material.service';
 import { AuthService } from '../shared/services/auth.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(
-    control: FormControl | null,
-    form: FormGroupDirective | NgForm | null
-  ): boolean {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || isSubmitted));
   }
@@ -30,29 +21,17 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   aSub!: Subscription;
   form: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-    ]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     remember: new FormControl(true),
   });
 
-  constructor(
-    private auth: AuthService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private materialService: MaterialService
-  ) {}
+  constructor(private auth: AuthService, private router: Router, private route: ActivatedRoute, private materialService: MaterialService) {}
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
       if (params['registered']) {
-        this.materialService.openSnackBar(
-          'Теперь вы можете войти в систему используя стандартный пароль'
-        );
+        this.materialService.openSnackBar('Теперь вы можете войти в систему используя стандартный пароль');
       } else if (params['accessDenied']) {
-        this.materialService.openSnackBar(
-          'Войдите в систему используя пользовательские данные'
-        );
+        this.materialService.openSnackBar('Войдите в систему используя пользовательские данные');
       }
     });
   }

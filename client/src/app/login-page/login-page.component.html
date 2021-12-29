@@ -4,55 +4,26 @@
     <form [formGroup]="form" (ngSubmit)="submit()">
       <p>
         <mat-form-field>
-          <input
-            type="text"
-            matInput
-            placeholder="Имя пользователя"
-            formControlName="username"
-            [errorStateMatcher]="matcher"
-          />
-          <mat-error *ngIf="form.controls['username'].hasError('required')">
-            Имя пользователя не может быть <strong>пустым</strong>
-          </mat-error>
+          <input type="text" matInput placeholder="Имя пользователя" formControlName="username" [errorStateMatcher]="matcher" />
+          <mat-error *ngIf="form.controls['username'].hasError('required')"> Имя пользователя не может быть <strong>пустым</strong> </mat-error>
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field>
-          <input
-            type="password"
-            matInput
-            placeholder="Пароль"
-            formControlName="password"
-            [errorStateMatcher]="matcher"
-          />
-          <mat-error
-            *ngIf="
-              !form.controls['password'].hasError('required') ||
-              form.controls['password'].hasError('minLength')
-            "
-          >
+          <input type="password" matInput placeholder="Пароль" formControlName="password" [errorStateMatcher]="matcher" />
+          <mat-error *ngIf="!form.controls['password'].hasError('required') || form.controls['password'].hasError('minLength')">
             Минимальная длина пароля <strong>6 символов</strong>. Длина пароля:
             <strong>{{ form.value.password.length }}</strong>
           </mat-error>
-          <mat-error *ngIf="form.controls['password'].hasError('required')">
-            Пароль не может быть <strong>пустым</strong>
-          </mat-error>
+          <mat-error *ngIf="form.controls['password'].hasError('required')"> Пароль не может быть <strong>пустым</strong> </mat-error>
         </mat-form-field>
       </p>
 
       <mat-checkbox formControlName="remember">Запомнить пароль</mat-checkbox>
 
       <div class="button">
-        <button
-          class="submit-button"
-          type="submit"
-          mat-flat-button
-          color="primary"
-          [disabled]="form.invalid || form.disabled"
-        >
-          Вход
-        </button>
+        <button class="submit-button" type="submit" mat-flat-button color="primary" [disabled]="form.invalid || form.disabled">Вход</button>
       </div>
     </form>
   </mat-card-content>
