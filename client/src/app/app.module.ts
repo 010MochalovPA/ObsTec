@@ -23,9 +23,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './shared/classes/token.interceptor';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TechLayoutComponent } from './shared/layouts/tech-layout/tech-layout.component';
+import { TechPageComponent } from './tech-page/tech-page.component';
+import { ActsPageComponent } from './acts-page/acts-page.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, AuthLayoutComponent, MainLayoutComponent, ResetPageComponent],
+  declarations: [AppComponent, LoginPageComponent, AuthLayoutComponent, MainLayoutComponent, ResetPageComponent, TechLayoutComponent, TechPageComponent, ActsPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

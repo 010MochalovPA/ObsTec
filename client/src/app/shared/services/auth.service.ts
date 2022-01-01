@@ -9,17 +9,32 @@ import { User } from '../interfaces';
 })
 export class AuthService {
   private token = '';
+  private username = '';
   constructor(private http: HttpClient) {}
   login(user: User): Observable<{ token: string }> {
     return this.http.post<{ token: string }>('/api/auth/login', user).pipe(
       tap(({ token }) => {
-        localStorage.setItem('auth-token', token);
+        this.setUsername(user.username);
         this.setToken(token);
       })
     );
   }
   setToken(token: string) {
     this.token = token;
+    localStorage.setItem('auth-token', token);
+  }
+
+  setUsername(username: string) {
+    this.username = username;
+    localStorage.setItem('username', username);
+  }
+
+  getUsername(): string | null {
+    if (localStorage.getItem('username')) {
+      return localStorage.getItem('username');
+    } else {
+      return this.username;
+    }
   }
 
   getToken(): string {
@@ -31,6 +46,7 @@ export class AuthService {
   }
 
   logout() {
+    this.setUsername('');
     this.setToken('');
     localStorage.clear();
   }

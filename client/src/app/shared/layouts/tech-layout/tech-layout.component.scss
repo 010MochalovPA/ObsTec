@@ -1,0 +1,20 @@
+.drawer-content {
+  width: 15vw;
+  @media (max-width: 1450px) {
+    width: 20vw;
+  }
+}
+
+mat-drawer-container {
+  height: calc(100% - 128px);
+}
+
+mat-nav-list {
+  padding: 0;
+}
+
+[mat-list-item] {
+  &.active-mat-nav-item {
+    background-color: #ffd740 !important;
+  }
+}
