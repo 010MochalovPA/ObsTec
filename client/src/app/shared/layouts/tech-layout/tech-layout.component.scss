@@ -9,12 +9,22 @@ mat-drawer-container {
   height: calc(100% - 128px);
 }
 
+mat-drawer-content {
+  padding: 0 10px;
+}
 mat-nav-list {
   padding: 0;
 }
 
 [mat-list-item] {
   &.active-mat-nav-item {
-    background-color: #ffd740 !important;
+    background-color: #ebebeb !important;
+    color: #673ab7 !important;
   }
+}
+
+.second-mat-toolbar {
+  -webkit-box-shadow: 0px 20px 10px -20px rgba(34, 60, 80, 1) inset;
+  -moz-box-shadow: 0px 20px 10px -20px rgba(34, 60, 80, 1) inset;
+  box-shadow: 0px 20px 10px -20px rgba(34, 60, 80, 1) inset;
 }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -28,7 +28,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   constructor(private auth: AuthService, private router: Router, private route: ActivatedRoute, private materialService: MaterialService) {}
   ngOnInit(): void {
     if (this.auth.isAuthenticated()) {
-      this.router.navigate(['/tech']);
+      this.router.navigate(['/audit']);
     }
     this.route.queryParams.subscribe((params: Params) => {
       if (params['registered']) {
@@ -55,7 +55,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     };
     this.aSub = this.auth.login(user).subscribe(
       () => {
-        this.router.navigate(['/tech']);
+        this.router.navigate(['/audit/tech']);
       },
       (error) => {
         this.materialService.openSnackBar(error.error.message);

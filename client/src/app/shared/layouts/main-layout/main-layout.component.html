@@ -1,21 +1,15 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <a mat-button>
-      <img class="donut-logo" src="assets/webp/donut-logo.webp" alt="donut-logo.webp" />
-      Информационный портал ОИТ
-    </a>
+  <a mat-button>
+    <img class="donut-logo" src="assets/webp/donut-logo.webp" alt="donut-logo.webp" />
+    Информационный портал ОИТ
+  </a>
 
-    <a *ngFor="let link of mainLinks" mat-button [routerLink]="link.disable ? null : link.url" [disabled]="link.disable" routerLinkActive="active-mat-flat-button">{{ link.name }}</a>
+  <a *ngFor="let link of mainLinks" mat-button [routerLink]="link.disable ? null : link.url" [disabled]="link.disable" routerLinkActive="active-mat-flat-button">{{ link.name }}</a>
 
-    <span class="spacer"></span>
+  <span class="spacer"></span>
 
-    <span class="username"><mat-icon>person</mat-icon>{{ username }}</span>
-    <a mat-flat-button (click)="logout()" class="warn" color="warn">Выход</a>
-  </mat-toolbar-row>
-  <mat-toolbar-row class="second-mat-toolbar">
-    <span style="margin-left: 40px">{{ MainDescription }}</span>
-    <span class="spacer"></span>
-  </mat-toolbar-row>
+  <span class="username"><mat-icon>person</mat-icon>{{ username }}</span>
+  <a mat-flat-button (click)="logout()" class="warn" color="warn">Выход</a>
 </mat-toolbar>
 
 <router-outlet></router-outlet>

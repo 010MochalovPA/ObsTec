@@ -16,6 +16,7 @@ PERSON	{         // Модель Сотрудника
   secondName	    // Фамилия
   patronymic	    // Отчество
   unit	          // Управление( Территориальный орган)
+  group           // Отдел
   position	      // Должность
   adress	        // Рабочий адрес
   officeNumber	  // Номер кабинета

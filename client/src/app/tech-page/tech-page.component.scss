@@ -1,0 +1,78 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.table-container {
+  position: relative;
+  max-height: 720px;
+  overflow: auto;
+}
+
+mat-form-field {
+  width: 30% !important;
+}
+
+.setting-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.loading {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.person {
+  margin-top: 1.1em;
+}
+.button-hidden {
+  display: none;
+}
+
+.selected-row {
+  background-color: #ebebeb !important;
+  .mat-cell {
+    color: #522e92 !important;
+  }
+  .button-no-hidden {
+    display: block;
+  }
+}
+
+button {
+  margin-right: 10px;
+  mat-icon {
+    font-size: 1.6em;
+  }
+}
+
+.settings-item {
+  width: 30%;
+}
+.test {
+  text-align: end;
+}
+
+.filter-icon {
+  mat-icon {
+    font-size: 18px;
+  }
+  position: absolute;
+  right: -10px;
+  bottom: -5px;
+}
+
+.mat-header-cell {
+  color: black !important;
+  background-color: #fff !important;
+  font-weight: 400;
+  font-size: 16px;
+  text-decoration: none;
+}
