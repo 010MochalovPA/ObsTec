@@ -18,6 +18,7 @@ module.exports.create = async (request, response) => {
   try {
     const deviceType = await new DeviceType({
       name: request.body.name,
+      description: request.body.description,
     }).save();
     response.status(201).json(deviceType);
   } catch (e) {
@@ -25,7 +26,12 @@ module.exports.create = async (request, response) => {
   }
 };
 module.exports.update = async (request, response) => {
-  // изменить тип устройства
+  try {
+    const deviceType = await DeviceType.findOneAndUpdate({ _id: request.params.id }, { $set: request.body }, { new: true });
+    response.status(200).json(deviceType);
+  } catch (e) {
+    errorHandler(response, e);
+  }
 };
 module.exports.delete = async (request, response) => {
   // удалить тип устройства

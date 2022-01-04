@@ -18,6 +18,21 @@ body {
 .spacer {
   flex: 1 1 auto;
 }
-.loader {
+.loading {
+  display: flex;
+  text-align: center;
+  justify-content: center;
   margin: 20% auto;
+}
+.selected-row {
+  background-color: #ebebeb !important;
+  .mat-cell {
+    color: #522e92 !important;
+  }
+  .button-no-hidden {
+    display: block;
+  }
+}
+mat-dialog-container {
+  padding: 0 !important;
 }

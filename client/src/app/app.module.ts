@@ -22,12 +22,27 @@ import { TechPageComponent } from './tech-page/tech-page.component';
 import { ActsPageComponent } from './acts-page/acts-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 
-import { MaterialExampleModule } from './material.module';
+import { MaterialModule } from './material.module';
 import { TechFormComponent } from './tech-page/tech-form/tech-form.component';
+import { CollectionsPageComponent } from './collections-page/collections-page.component';
+import { VendorFormComponent } from './collections-page/vendor-form/vendor-form.component';
 
 @NgModule({
-  imports: [BrowserModule, CommonModule, AppRoutingModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule, HttpClientModule, MaterialExampleModule],
-  declarations: [AppComponent, LoginPageComponent, AuthLayoutComponent, MainLayoutComponent, ResetPageComponent, TechLayoutComponent, TechPageComponent, ActsPageComponent, OverviewPageComponent, TechFormComponent],
+  imports: [BrowserModule, CommonModule, AppRoutingModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule, HttpClientModule, MaterialModule],
+  declarations: [
+    AppComponent,
+    LoginPageComponent,
+    AuthLayoutComponent,
+    MainLayoutComponent,
+    ResetPageComponent,
+    TechLayoutComponent,
+    TechPageComponent,
+    ActsPageComponent,
+    OverviewPageComponent,
+    TechFormComponent,
+    CollectionsPageComponent,
+    VendorFormComponent,
+  ],
 
   providers: [
     {

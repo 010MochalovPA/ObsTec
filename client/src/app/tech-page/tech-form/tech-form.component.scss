@@ -1,0 +1,23 @@
+.container {
+  width: 60%;
+  margin: 0 auto;
+}
+.tech-form-input {
+  font-size: 12px !important;
+  &.tech-form-input-type {
+    width: 100%;
+  }
+}
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .tech-form-input {
+    width: 30%;
+  }
+}
+@media (max-width: 1450px) {
+  .container {
+    width: 90%;
+  }
+}

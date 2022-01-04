@@ -18,10 +18,15 @@ export class TokenInterceptor implements HttpInterceptor {
         },
       });
     }
-    return next.handle(request).pipe(catchError((error: HttpErrorResponse) => this.handleAuthError(error)));
+    return next.handle(request).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return this.handleAuthError(error);
+      })
+    );
   }
   private handleAuthError(error: HttpErrorResponse): Observable<any> {
     if (error.status === 401) {
+      this.auth.logout();
       this.router.navigate(['/login'], {
         queryParams: {
           sessionFailed: true,

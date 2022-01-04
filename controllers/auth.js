@@ -8,8 +8,8 @@ const errorHandler = require("../utils/errorHandler");
 module.exports.login = async (request, response) => {
   // username: String;
   // password: String;
-  // expiresIn: String
-  const expiresInTest = request.body.expiresIn ? request.body.expiresIn : 1;
+  // expiresIn?: String
+  const expiresInValue = request.body.expiresIn ? request.body.expiresIn : 1;
   tmpUser = await User.findOne({ username: request.body.username });
   if (tmpUser) {
     const passwordResult = bcrypt.compareSync(request.body.password, tmpUser.password);
@@ -20,7 +20,7 @@ module.exports.login = async (request, response) => {
           userId: tmpUser._id,
         },
         keys.jwt,
-        { expiresIn: 60 * 60 * expiresInTest }
+        { expiresIn: 60 * 60 * expiresInValue }
       ); //expiresIn время жизни токена
 
       response.status(200).json({ token: `Bearer ${token}` });

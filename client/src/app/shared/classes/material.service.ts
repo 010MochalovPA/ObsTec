@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, TemplateRef } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -6,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root',
 })
 export class MaterialService {
-  constructor(private _snackBar: MatSnackBar) {}
+  constructor(private _snackBar: MatSnackBar, public dialog: MatDialog) {}
 
   openSnackBar(message: string) {
     this._snackBar.open(message, '', {
@@ -14,5 +15,11 @@ export class MaterialService {
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+  }
+  openDialog(dialogRef: TemplateRef<any>) {
+    this.dialog.open(dialogRef);
+  }
+  closeDialog() {
+    this.dialog.closeAll();
   }
 }

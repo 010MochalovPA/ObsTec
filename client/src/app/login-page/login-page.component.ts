@@ -35,7 +35,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         this.materialService.openSnackBar('Теперь вы можете войти в систему используя стандартный пароль');
       } else if (params['accessDenied']) {
         this.materialService.openSnackBar('Войдите в систему используя пользовательские данные');
-      } else if (params['accessFailed']) {
+      } else if (params['sessionFailed']) {
         this.materialService.openSnackBar('Сессия закончилась, пожалуйста войдите в систему еще раз');
       }
     });

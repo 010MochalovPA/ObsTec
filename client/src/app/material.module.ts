@@ -94,4 +94,4 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ScrollingModule,
   ],
 })
-export class MaterialExampleModule {}
+export class MaterialModule {}

@@ -10,6 +10,7 @@ import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.co
 import { TechLayoutComponent } from './shared/layouts/tech-layout/tech-layout.component';
 import { TechFormComponent } from './tech-page/tech-form/tech-form.component';
 import { TechPageComponent } from './tech-page/tech-page.component';
+import { CollectionsPageComponent } from './collections-page/collections-page.component';
 
 const routes: Routes = [
   {
@@ -32,9 +33,10 @@ const routes: Routes = [
         component: TechLayoutComponent,
         canActivate: [AuthGuard],
         children: [
-          { path: '', redirectTo: 'overview', pathMatch: 'full' },
           { path: 'tech', component: TechPageComponent },
           { path: 'tech/new', component: TechFormComponent },
+          { path: 'tech/:id', component: TechFormComponent },
+          { path: 'collections', component: CollectionsPageComponent },
           { path: 'overview', component: OverviewPageComponent },
         ],
       },

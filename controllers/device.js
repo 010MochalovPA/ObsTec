@@ -31,8 +31,6 @@ module.exports.getByTypeId = async (request, response) => {
     const type = await DeviceType.findOne({
       _id: request.params.deviceTypeId,
     });
-    console.log(request.params.deviceTypeId);
-    console.log(type);
     const devices = await Device.find({
       deviceTypeId: request.params.deviceTypeId,
     });

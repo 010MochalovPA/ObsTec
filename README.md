@@ -27,6 +27,7 @@ PERSON	{         // Модель Сотрудника
 DEVICETYPE	{     // Тип устройства
   name            // Наименование типа
   _id	            // id Типа
+  description     // Описание
 }
 
 Device	{         // Устройство
@@ -38,6 +39,18 @@ Device	{         // Устройство
   PersonId        // id сотрудника
   _id	            // id устройства
 }
+
+Vendor {
+  name:           //Название вендора
+  deviceTypeId    //id Типа устройства
+  _id:            //id Производителя
+}
+
+Model {
+  name :        // Название модели
+  VendorId :    //id производителя
+  _id:          //id модели
+}
 ```
 
 # API's
@@ -46,6 +59,7 @@ Device	{         // Устройство
 AUTH	{                         // routes/auth
   /api/login (POST)	            // Запрос логина
   /api/register (POST)          // Запрос регистрации
+  /api/reset (POST)             // Сброс пароля
 }
 
 PERSON	{                       // routes/person
@@ -64,13 +78,13 @@ DEVICETYPE	{                   // routes/devicetype
   /api/devicetype/:id (PATCH)	  // Изменение типа
 }
 
-Device	{                         // routes/device
-  /api/device (GET)	              // Получение всех устройств
-  /api/device/:id (GET)	          // Получение конкретного девайса
-  /api/device/:devicetype (GET)	  // Получение устройств по типу
-  /api/device/:person (GET)	      // Получение устройств по сотруднику
-  /api/device (POST)	            // Создание
-  /api/device/:id (PATCH)	        // Изменение
-  /api/device/:id (DELETE)	      // Удаление
+Device	{                                         // routes/device
+  /api/device (GET)	                              // Получение всех устройств
+  /api/device/:id (GET)	                          // Получение конкретного девайса
+  /api/device/devicetype/:deviceTypeId (GET)	    // Получение устройств по типу
+  /api/device/:person (GET)	                      // Получение устройств по сотруднику
+  /api/device (POST)	                            // Создание
+  /api/device/:id (PATCH)	                        // Изменение
+  /api/device/:id (DELETE)	                      // Удаление
 }
 ```

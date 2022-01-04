@@ -1,1 +1,32 @@
-<p>tech-form works!</p>
+<div class="container">
+  <h3>Добавить устройство</h3>
+
+  <form action="">
+    <mat-card>
+      <h4>Обязательные параметры</h4>
+      <mat-form-field class="tech-form-input tech-form-input-type" appearance="fill">
+        <mat-label>Тип устройства</mat-label>
+        <mat-select>
+          <mat-option value="one">Принтер</mat-option>
+          <mat-option value="two">Компьютер</mat-option>
+          <mat-option value="tree">Сканер</mat-option>
+          <mat-option value="four">Монитор</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="form-row">
+        <mat-form-field class="tech-form-input" appearance="fill">
+          <mat-label>Модель устройства</mat-label>
+          <input matInput />
+        </mat-form-field>
+        <mat-form-field class="tech-form-input" appearance="fill">
+          <mat-label>Серийный номер</mat-label>
+          <input matInput />
+        </mat-form-field>
+        <mat-form-field class="tech-form-input" appearance="fill">
+          <mat-label>Инвентарный номер</mat-label>
+          <input matInput />
+        </mat-form-field>
+      </div>
+    </mat-card>
+  </form>
+</div>

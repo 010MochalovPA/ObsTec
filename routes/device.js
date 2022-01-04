@@ -9,7 +9,7 @@ router.get("/", passport.authenticate("jwt", { session: false }), controller.get
 //localhost:5000/api/device/:id
 router.get("/:id", passport.authenticate("jwt", { session: false }), controller.getById);
 
-//localhost:5000/api/device/:devicetypeId
+//localhost:5000/api/device/devicetype/:deviceTypeId
 router.get("/devicetype/:deviceTypeId", passport.authenticate("jwt", { session: false }), controller.getByTypeId);
 
 //localhost:5000/api/device/:personId

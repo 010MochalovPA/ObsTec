@@ -14,3 +14,13 @@ export interface Device {
   PersonId?: string;
   _id?: string;
 }
+
+export interface Vendor {
+  name: string;
+  _id?: string;
+}
+
+export interface DeviceType {
+  name: string;
+  description: string;
+}
