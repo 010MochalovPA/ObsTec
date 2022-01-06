@@ -15,12 +15,27 @@ export interface Device {
   _id?: string;
 }
 
-export interface Vendor {
+// export interface Vendor {
+//   name: string;
+//   _id?: string;
+// }
+
+// export interface DeviceType {
+//   name: string;
+//   _id?: string;
+// }
+
+export interface Message {
+  message: string;
+}
+
+export interface Collection {
   name: string;
   _id?: string;
 }
 
-export interface DeviceType {
+export interface CollectionsList {
+  title: string;
   name: string;
-  description: string;
+  url: string;
 }

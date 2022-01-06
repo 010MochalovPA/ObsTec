@@ -1,5 +1,3 @@
-<mat-tab-group>
-  <mat-tab class="mat-tab-vendors" label="Производители"><app-vendor-form></app-vendor-form> </mat-tab>
-  <mat-tab label="Тип оборудования"> Content 2 </mat-tab>
-  <mat-tab label="Запасные части"> Content 3 </mat-tab>
+<mat-tab-group dynamicHeight animationDuration="300ms">
+  <mat-tab *ngFor="let collection of collectionsItems" [label]="collection.title"><app-collections-form [collection]="collection"></app-collections-form></mat-tab>
 </mat-tab-group>

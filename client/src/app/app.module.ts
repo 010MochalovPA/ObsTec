@@ -25,7 +25,7 @@ import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { MaterialModule } from './material.module';
 import { TechFormComponent } from './tech-page/tech-form/tech-form.component';
 import { CollectionsPageComponent } from './collections-page/collections-page.component';
-import { VendorFormComponent } from './collections-page/vendor-form/vendor-form.component';
+import { CollectionsFormComponent } from './collections-page/collections-form/collections-form.component';
 
 @NgModule({
   imports: [BrowserModule, CommonModule, AppRoutingModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule, HttpClientModule, MaterialModule],
@@ -41,7 +41,8 @@ import { VendorFormComponent } from './collections-page/vendor-form/vendor-form.
     OverviewPageComponent,
     TechFormComponent,
     CollectionsPageComponent,
-    VendorFormComponent,
+    CollectionsPageComponent,
+    CollectionsFormComponent,
   ],
 
   providers: [

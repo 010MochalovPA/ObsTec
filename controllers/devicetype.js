@@ -15,14 +15,24 @@ module.exports.getById = async (request, response) => {
 };
 module.exports.create = async (request, response) => {
   // Создать тип устройства
-  try {
-    const deviceType = await new DeviceType({
-      name: request.body.name,
-      description: request.body.description,
-    }).save();
-    response.status(201).json(deviceType);
-  } catch (e) {
-    errorHandler(response, e);
+  isDublicated = false;
+  const devicetypes = await DeviceType.find({});
+  devicetypes.forEach(devicetype => {
+    if (devicetype.name.toLowerCase() === request.body.name.toLowerCase()) isDublicated = true;
+  });
+  if (isDublicated) {
+    response.status(409).json({
+      message: "Данный тип уже существует",
+    });
+  } else {
+    try {
+      const devicetype = await new DeviceType({
+        name: request.body.name,
+      }).save();
+      response.status(201).json(devicetype);
+    } catch (e) {
+      errorHandler(response, e);
+    }
   }
 };
 module.exports.update = async (request, response) => {
@@ -34,5 +44,12 @@ module.exports.update = async (request, response) => {
   }
 };
 module.exports.delete = async (request, response) => {
-  // удалить тип устройства
+  try {
+    await DeviceType.remove({ _id: request.params.id });
+    response.status(200).json({
+      message: "Тип устройства удален",
+    });
+  } catch (e) {
+    errorHandler(response, e);
+  }
 };

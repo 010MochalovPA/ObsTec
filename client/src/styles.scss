@@ -24,6 +24,7 @@ body {
   justify-content: center;
   margin: 20% auto;
 }
+
 .selected-row {
   background-color: #ebebeb !important;
   .mat-cell {
@@ -35,4 +36,78 @@ body {
 }
 mat-dialog-container {
   padding: 0 !important;
+}
+
+.vendor-card {
+  max-width: 400px;
+  margin-bottom: 10px;
+}
+.content {
+  padding: 10px !important;
+  margin: 0 auto;
+  width: 900px;
+
+  .mat-elevation-z8 {
+    .table-container {
+      table {
+        width: 100%;
+      }
+    }
+  }
+}
+.table-container-collections {
+  position: relative;
+  max-height: 660px;
+  overflow: auto;
+}
+.buttons-actions {
+  button {
+    margin-right: 10px;
+    mat-icon {
+      font-size: 1.6em;
+    }
+  }
+}
+
+.setting-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settings-item-3 {
+  flex: 3;
+}
+.delete {
+  text-align: end;
+}
+
+.filter {
+  font-size: 14px !important;
+}
+.dialog {
+  padding: 25px !important;
+}
+.dialog-buttons {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin: 0 auto;
+
+  button {
+    margin: 0px !important;
+    width: 200px;
+    padding: 0;
+    &:first-child {
+      margin-right: 20px !important;
+    }
+  }
+}
+
+.collection-item-delete {
+  margin-left: 10px !important;
+}
+
+table {
+  width: 100%;
 }
