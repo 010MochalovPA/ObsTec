@@ -1,19 +1,23 @@
-<div *ngIf="!isLoading" class="content">
+<div class="content">
   <div class="setting-menu">
-    <div class="buttons-actions settings-item-2">
+    <div class="buttons-actions buttons-actions-first settings-item-2">
       <button (click)="openDialog()" mat-raised-button color="accent">Добавить <mat-icon>add</mat-icon></button>
-      <button (click)="onEdit()" [disabled]="!selectedRow" mat-raised-button color="primary">Изменить <mat-icon>edit</mat-icon></button>
+      <button (click)="onRefresh()" mat-raised-button color="basic">Обновить <mat-icon>refresh</mat-icon></button>
     </div>
     <mat-form-field color="basic" class="settings-item-3 filter" appearance="standard">
       <mat-label>Фильтр</mat-label>
       <input [(ngModel)]="filterValue" matInput (keyup)="applyFilter($event)" placeholder="Значение для фильтра" #input />
-      <button *ngIf="filterValue" matSuffix mat-icon-button aria-label="Clear" (click)="clearFilter()">
+      <button *ngIf="filterValue" matSuffix mat-icon-button aria-label="Clear" (click)="clearSelect()">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
-    <button (click)="onDelete()" class="collection-item-delete settings-item" [disabled]="!selectedRow" mat-raised-button color="warn">Удалить <mat-icon>delete</mat-icon></button>
+    <div class="buttons-actions buttons-actions-second settings-item-2">
+      <button (click)="onEdit()" [disabled]="!selectedRow" mat-raised-button color="primary">Изменить <mat-icon>edit</mat-icon></button>
+      <button (click)="onDelete()" [disabled]="!selectedRow" mat-raised-button color="warn">Удалить <mat-icon>delete</mat-icon></button>
+    </div>
   </div>
-  <div class="main-table">
+
+  <div *ngIf="!isLoading" class="main-table">
     <div class="mat-elevation-z8">
       <div class="table-container-collections">
         <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort (matSortChange)="sortData()" matSortDirection="desc" class="mat-elevation-z8">
@@ -29,10 +33,11 @@
       </div>
     </div>
   </div>
+  <div class="loading" *ngIf="isLoading">
+    <mat-spinner diameter="70" color="accent"></mat-spinner>
+  </div>
 </div>
-<div class="loading" *ngIf="isLoading">
-  <mat-spinner diameter="70" color="accent"></mat-spinner>
-</div>
+
 <ng-template #collectionsDialog>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-card class="dialog">

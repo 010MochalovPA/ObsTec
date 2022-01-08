@@ -1,3 +1,3 @@
-<mat-tab-group dynamicHeight animationDuration="300ms">
+<mat-tab-group (selectedTabChange)="clearSelect()" animationDuration="400ms">
   <mat-tab *ngFor="let collection of collectionsItems" [label]="collection.title"><app-collections-form [collection]="collection"></app-collections-form></mat-tab>
 </mat-tab-group>

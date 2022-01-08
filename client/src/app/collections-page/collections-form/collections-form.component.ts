@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild, EventEmitter } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Collection, CollectionsList } from 'src/app/shared/interfaces';
@@ -6,6 +6,7 @@ import { MaterialService } from 'src/app/shared/classes/material.service';
 import { CollectionsService } from 'src/app/shared/services/collections.service';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { Observable } from 'rxjs';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -20,6 +21,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class CollectionsFormComponent implements OnInit, OnDestroy {
   @Input() collection!: CollectionsList;
+
   @ViewChild(MatTable) table!: MatTable<Collection[]>;
   @ViewChild('collectionsDialog') dialogRef!: TemplateRef<any>;
   @ViewChild(MatSort) sort!: MatSort;
@@ -52,13 +54,14 @@ export class CollectionsFormComponent implements OnInit, OnDestroy {
   closeDialog() {
     this.materialService.closeDialog();
     this.form.reset();
+    this.clearSelect();
   }
   ngOnDestroy(): void {
-    this.selectedRow = null;
+    this.clearSelect();
     this.materialService.closeDialog();
   }
   sortData() {
-    this.selectedRow = null;
+    this.clearSelect();
     this.dataSource.sort = this.sort;
   }
   applyFilter(event: Event) {
@@ -66,11 +69,7 @@ export class CollectionsFormComponent implements OnInit, OnDestroy {
     this.filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = this.filterValue.trim().toLowerCase();
   }
-  clearFilter() {
-    this.selectedRow = null;
-    this.filterValue = '';
-    this.dataSource.filter = this.filterValue.trim().toLowerCase();
-  }
+
   onSubmit() {
     this.form.disable();
     const newItem: Collection = {
@@ -79,7 +78,7 @@ export class CollectionsFormComponent implements OnInit, OnDestroy {
     if (this.isNew) {
       this.collectionsService.create(this.collection.url, newItem).subscribe(
         (dataItem) => {
-          this.materialService.openSnackBar(`Производитель ${dataItem.name} создан!`);
+          this.materialService.openSnackBar(`${this.collection.name} ${dataItem.name} создан!`);
           this.collectionData.push(dataItem);
           this.dataSource.data = this.collectionData;
           this.table.renderRows();
@@ -91,13 +90,13 @@ export class CollectionsFormComponent implements OnInit, OnDestroy {
         () => {
           this.materialService.closeDialog();
           this.form.enable();
-          this.selectedRow = null;
+          this.clearSelect();
         }
       );
     } else {
       this.collectionsService.update(this.collection.url, newItem, this.selectedRow?._id).subscribe(
         (dataItem) => {
-          this.materialService.openSnackBar(`Производитель ${dataItem.name} изменен!`);
+          this.materialService.openSnackBar(`${this.collection.name} ${dataItem.name} изменен!`);
           const index = this.collectionData.findIndex((item) => item._id === this.selectedRow?._id);
           this.collectionData[index] = dataItem;
           this.dataSource.data = this.collectionData;
@@ -122,7 +121,7 @@ export class CollectionsFormComponent implements OnInit, OnDestroy {
     this.materialService.openDialog(this.dialogRef);
   }
   onDelete() {
-    const decision = window.confirm(`Удалить производителя ${this.selectedRow!.name}`);
+    const decision = window.confirm(`Удалить ${this.selectedRow!.name} из справочника ${this.collection.title}?`);
     if (decision) {
       this.collectionsService.delete(this.collection.url, this.selectedRow!).subscribe(
         (response) => {
@@ -130,12 +129,27 @@ export class CollectionsFormComponent implements OnInit, OnDestroy {
           this.collectionData.splice(index, 1);
           this.dataSource.data = this.collectionData;
           this.materialService.openSnackBar(response.message);
-          this.selectedRow = null;
+          this.clearSelect();
         },
         (error) => {
           this.materialService.openSnackBar(error);
         }
       );
     }
+  }
+  onRefresh() {
+    this.isLoading = true;
+    this.collectionsService.fetch(this.collection.url).subscribe((data) => {
+      this.isLoading = false;
+      this.collectionData = data;
+      this.dataSource.data = this.collectionData;
+    });
+    this.clearSelect();
+  }
+  clearSelect() {
+    this.selectedRow = null;
+    this.form.reset();
+    this.filterValue = '';
+    this.dataSource.filter = this.filterValue.trim().toLowerCase();
   }
 }

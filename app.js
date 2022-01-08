@@ -10,6 +10,8 @@ const personRoutes = require("./routes/person");
 const deviceRoutes = require("./routes/device");
 const deviceTypeRoutes = require("./routes/devicetype");
 const vendorRoutes = require("./routes/vendor");
+const unitRoutes = require("./routes/unit");
+const groupRoutes = require("./routes/group");
 
 const app = express();
 
@@ -34,5 +36,6 @@ app.use("/api/person", personRoutes);
 app.use("/api/device", deviceRoutes);
 app.use("/api/devicetype", deviceTypeRoutes);
 app.use("/api/vendor", vendorRoutes);
-app.use("/api/model", deviceTypeRoutes);
+app.use("/api/unit", unitRoutes);
+app.use("/api/group", groupRoutes);
 module.exports = app;

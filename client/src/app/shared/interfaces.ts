@@ -15,16 +15,6 @@ export interface Device {
   _id?: string;
 }
 
-// export interface Vendor {
-//   name: string;
-//   _id?: string;
-// }
-
-// export interface DeviceType {
-//   name: string;
-//   _id?: string;
-// }
-
 export interface Message {
   message: string;
 }
@@ -32,10 +22,13 @@ export interface Message {
 export interface Collection {
   name: string;
   _id?: string;
+  parent?: string;
 }
 
 export interface CollectionsList {
   title: string;
+  parent?: string;
+  parentName?: string;
   name: string;
   url: string;
 }
