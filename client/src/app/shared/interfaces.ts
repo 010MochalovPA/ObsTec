@@ -22,13 +22,27 @@ export interface Message {
 export interface Collection {
   name: string;
   _id?: string;
-  parent?: string;
+}
+
+export interface CollectionChild {
+  name: string;
+  ParentId: string;
+  _id?: string;
 }
 
 export interface CollectionsList {
   title: string;
-  parent?: string;
-  parentName?: string;
   name: string;
   url: string;
+}
+
+export interface CollectionsListChild {
+  title: string;
+  name: string;
+  url: string;
+  parent: {
+    title: string;
+    name: string;
+    url: string;
+  };
 }

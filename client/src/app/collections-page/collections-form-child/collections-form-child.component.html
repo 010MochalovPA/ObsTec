@@ -1,0 +1,69 @@
+<div class="content">
+  <mat-form-field style="width: 100%; font-size: 14px" appearance="fill">
+    <mat-label>Выберите {{ collection.parent.name }}</mat-label>
+    <mat-select [disabled]="isLoading" (selectionChange)="onRefresh()" [(ngModel)]="selectedParent">
+      <mat-option *ngFor="let element of parentData" [value]="element._id">{{ element.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div style="margin-top: -20px" class="setting-menu">
+    <div class="buttons-actions buttons-actions-first settings-item-2">
+      <button (click)="openDialog()" [disabled]="!selectedParent" mat-raised-button color="accent">Добавить <mat-icon>add</mat-icon></button>
+      <button (click)="onRefresh()" [disabled]="!selectedParent" mat-raised-button color="basic">Обновить <mat-icon>refresh</mat-icon></button>
+    </div>
+    <mat-form-field color="basic" class="settings-item-3 filter" appearance="standard">
+      <mat-label>Фильтр</mat-label>
+      <input [disabled]="!selectedParent" [(ngModel)]="filterValue" matInput (keyup)="applyFilter($event)" placeholder="Значение для фильтра" #input />
+      <button *ngIf="filterValue" matSuffix mat-icon-button aria-label="Clear" (click)="clearSelect()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="buttons-actions buttons-actions-second settings-item-2">
+      <button (click)="onEdit()" [disabled]="!selectedRow || !selectedParent" mat-raised-button color="primary">Изменить <mat-icon>edit</mat-icon></button>
+      <button (click)="onDelete()" [disabled]="!selectedRow || !selectedParent" mat-raised-button color="warn">Удалить <mat-icon>delete</mat-icon></button>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading" class="main-table">
+    <div class="mat-elevation-z8" *ngIf="selectedParent">
+      <div class="table-container-collections-child">
+        <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort (matSortChange)="sortData()" matSortDirection="desc" class="mat-elevation-z8">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ collection.title }}</th>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+            <td mat-footer-cell *matFooterCellDef>Всего: {{ dataSource ? dataSource.filteredData.length : collectionData.length }}</td>
+          </ng-container>
+          <tr mat-header-row class="table-headers" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row (click)="selectedRow = element" [class.selected-row]="selectedRow === element" *matRowDef="let element; columns: displayedColumns"></tr>
+          <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="loading" *ngIf="isLoading">
+    <mat-spinner diameter="70" color="accent"></mat-spinner>
+  </div>
+</div>
+
+<ng-template #collectionsDialog>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-card class="dialog">
+      <mat-card-header style="margin-bottom: 30px">
+        <mat-card-title>{{ isNew ? "Добавить" : "Изменить" }} {{ collection.name }}</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-form-field style="width: 100%" appearance="fill">
+          <mat-label>{{ collection.name }}</mat-label>
+          <input formControlName="name" [errorStateMatcher]="matcher" matInput placeholder="Введите название" />
+          <mat-error *ngIf="form.controls['name'].hasError('required')"> Поле не может быть <strong>пустым</strong> </mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions class="dialog-buttons">
+        <button [disabled]="form.invalid || form.disabled || (!isNew && form.controls['name'].value == selectedRow!.name)" type="submit" mat-flat-button color="accent">
+          {{ isNew ? "Создать" : "Изменить" }}
+        </button>
+        <button type="button" (click)="closeDialog()" mat-stroked-button color="basic">Отмена</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</ng-template>

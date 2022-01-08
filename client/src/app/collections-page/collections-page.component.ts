@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { CollectionsList } from '../shared/interfaces';
-import { CollectionsFormComponent } from './collections-form/collections-form.component';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { CollectionsList, CollectionsListChild } from '../shared/interfaces';
 
 @Component({
   selector: 'app-collections-page',
@@ -8,22 +7,31 @@ import { CollectionsFormComponent } from './collections-form/collections-form.co
   styleUrls: ['./collections-page.component.scss'],
 })
 export class CollectionsPageComponent implements OnInit {
-  @ViewChildren(CollectionsFormComponent)
-  childComponents!: CollectionsFormComponent[];
+  @ViewChildren('collectionItem')
+  childComponents!: QueryList<any>;
 
-  collectionsItems: CollectionsList[] = [
+  collectionsItemsBasic: CollectionsList[] = [
     { title: 'Производители', name: 'Производитель', url: 'vendor' },
     { title: 'Типы устройств', name: 'Тип устройства', url: 'devicetype' },
-    { title: 'Управления ПФР (ТО)', name: 'Управление ПФР', url: 'unit' },
-    { title: 'Отделы', parentName: 'Управление', parent: 'unit', name: 'Отдел', url: 'group' },
+    { title: 'Управления ПФР', name: 'Управление ПФР', url: 'unit' },
+  ];
+  collectionsItemsChild: CollectionsListChild[] = [
+    { title: 'Отделы', name: 'Отдел', url: 'group', parent: { title: 'Управления ПФР', name: 'Управление ПФР', url: 'unit' } },
+    // { title: 'Модели', name: 'Модель', url: 'model', parent: { title: 'Производители', name: 'Производитель', url: 'vendor' } },
   ];
   constructor() {}
 
   ngOnInit(): void {}
 
-  clearSelect() {
+  clearSelect($event: any) {
     this.childComponents.forEach((child) => {
-      child.clearSelect();
+      if ($event.tab.textLabel == child.collection.title) {
+        child.clearSelect();
+        child.ngOnInit();
+        if (child.collection.parent) {
+          child.clearParent();
+        }
+      }
     });
   }
 }

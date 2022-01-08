@@ -1,11 +1,12 @@
 import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { Collection, CollectionsList } from 'src/app/shared/interfaces';
+import { Collection, CollectionChild, CollectionsList, CollectionsListChild } from 'src/app/shared/interfaces';
 import { MaterialService } from 'src/app/shared/classes/material.service';
 import { CollectionsService } from 'src/app/shared/services/collections.service';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { ThrowStmt } from '@angular/compiler';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -14,12 +15,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 @Component({
-  selector: 'app-collections-form',
-  templateUrl: './collections-form.component.html',
-  styleUrls: ['./collections-form.component.scss'],
+  selector: 'app-collections-form-child',
+  templateUrl: './collections-form-child.component.html',
+  styleUrls: ['./collections-form-child.component.scss'],
 })
-export class CollectionsFormComponent implements OnInit, OnDestroy {
-  @Input() collection!: CollectionsList;
+export class CollectionsFormChildComponent implements OnInit, OnDestroy {
+  @Input() collection!: CollectionsListChild;
 
   @ViewChild(MatTable) table!: MatTable<Collection[]>;
   @ViewChild('collectionsDialog') dialogRef!: TemplateRef<any>;
@@ -27,10 +28,13 @@ export class CollectionsFormComponent implements OnInit, OnDestroy {
   form: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
   });
+
   isNew = true;
-  collectionData: Collection[] = [];
+  collectionData: CollectionChild[] = [];
+  parentData: Collection[] = [];
   isLoading = false;
-  selectedRow!: Collection | null;
+  selectedRow?: CollectionChild | null;
+  selectedParent?: string;
   filterValue = '';
   displayedColumns: string[] = ['name'];
   dataSource = new MatTableDataSource(this.collectionData);
@@ -39,10 +43,9 @@ export class CollectionsFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.collectionsService.fetch(this.collection.url).subscribe((data) => {
+    this.collectionsService.fetch(this.collection.parent.url).subscribe((data) => {
+      this.parentData = data;
       this.isLoading = false;
-      this.collectionData = data;
-      this.dataSource.data = this.collectionData;
     });
   }
   openDialog() {
@@ -56,6 +59,7 @@ export class CollectionsFormComponent implements OnInit, OnDestroy {
     this.clearSelect();
   }
   ngOnDestroy(): void {
+    this.clearParent();
     this.clearSelect();
     this.materialService.closeDialog();
   }
@@ -71,11 +75,12 @@ export class CollectionsFormComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.form.disable();
-    const newItem: Collection = {
+    const newItem: CollectionChild = {
       name: this.form.value.name,
+      ParentId: this.selectedParent!,
     };
     if (this.isNew) {
-      this.collectionsService.create(this.collection.url, newItem).subscribe(
+      this.collectionsService.createChild(this.collection.url, newItem).subscribe(
         (dataItem) => {
           this.materialService.openSnackBar(`${this.collection.name} ${dataItem.name} создан!`);
           this.collectionData.push(dataItem);
@@ -93,7 +98,7 @@ export class CollectionsFormComponent implements OnInit, OnDestroy {
         }
       );
     } else {
-      this.collectionsService.update(this.collection.url, newItem, this.selectedRow?._id).subscribe(
+      this.collectionsService.updateChild(this.collection.url, newItem, this.selectedRow?._id).subscribe(
         (dataItem) => {
           this.materialService.openSnackBar(`${this.collection.name} ${dataItem.name} изменен!`);
           const index = this.collectionData.findIndex((item) => item._id === this.selectedRow?._id);
@@ -139,7 +144,7 @@ export class CollectionsFormComponent implements OnInit, OnDestroy {
   }
   onRefresh() {
     this.isLoading = true;
-    this.collectionsService.fetch(this.collection.url).subscribe((data) => {
+    this.collectionsService.fetchChild(this.collection.url, this.selectedParent!).subscribe((data) => {
       this.isLoading = false;
       this.collectionData = data;
       this.dataSource.data = this.collectionData;
@@ -151,5 +156,8 @@ export class CollectionsFormComponent implements OnInit, OnDestroy {
     this.form.reset();
     this.filterValue = '';
     this.dataSource.filter = this.filterValue.trim().toLowerCase();
+  }
+  clearParent() {
+    this.selectedParent = '';
   }
 }

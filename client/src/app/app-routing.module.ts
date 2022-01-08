@@ -33,6 +33,7 @@ const routes: Routes = [
         component: TechLayoutComponent,
         canActivate: [AuthGuard],
         children: [
+          { path: '', redirectTo: 'collections', pathMatch: 'full' },
           { path: 'tech', component: TechPageComponent },
           { path: 'tech/new', component: TechFormComponent },
           { path: 'tech/:id', component: TechFormComponent },

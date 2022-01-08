@@ -4,7 +4,7 @@
     Информационный портал ОИТ
   </a>
 
-  <a *ngFor="let link of mainLinks" mat-button [routerLink]="link.disable ? null : link.url" [disabled]="link.disable" routerLinkActive="active-mat-flat-button">{{ link.name }}</a>
+  <a *ngFor="let link of mainLinks" mat-button [routerLink]="link.disabled ? null : link.url" [disabled]="link.disabled" routerLinkActive="active-mat-flat-button">{{ link.name }}</a>
 
   <span class="spacer"></span>
 

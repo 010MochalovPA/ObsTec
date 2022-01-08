@@ -7,12 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TechLayoutComponent implements OnInit {
   techLinks = [
-    { url: '/audit/overview', name: 'Обзор' },
-    { url: '/audit/tech', name: 'Вычислительная техника' },
-    { url: '/audit/collections', name: 'Справочники' },
-    { url: '/audit/persons', name: 'Сотрудники' },
-    { url: '/audit/ipaddresses', name: 'IP-адреса' },
-    { url: '/audit/spares', name: 'Запасные части' },
+    { url: '/audit/overview', name: 'Обзор', disabled: false },
+    { url: '/audit/tech', name: 'Вычислительная техника', disabled: false },
+    { url: '/audit/collections', name: 'Справочники', disabled: false },
+    { url: '/audit/persons', name: 'Сотрудники', disabled: true },
+    { url: '/audit/ipaddresses', name: 'IP-адреса', disabled: true },
+    { url: '/audit/spares', name: 'Запасные части', disabled: true },
   ];
   constructor() {}
 

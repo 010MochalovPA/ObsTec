@@ -10,10 +10,10 @@ import { AuthService } from '../../services/auth.service';
 export class MainLayoutComponent implements OnInit {
   username: string | null = '';
   mainLinks = [
-    { url: '/audit', name: 'Учет техники', disable: false },
-    { url: '/acts', name: 'Акты выполненых работ', disable: false },
-    { url: '/phonebook', name: 'Телефонный справочник', disable: true },
-    { url: '/video', name: 'Записи видеоконференций', disable: true },
+    { url: '/audit', name: 'Учет техники', disabled: false },
+    { url: '/acts', name: 'Акты выполненых работ', disabled: true },
+    { url: '/phonebook', name: 'Телефонный справочник', disabled: true },
+    { url: '/video', name: 'Записи видеоконференций', disabled: true },
   ];
 
   MainDescription = '';
