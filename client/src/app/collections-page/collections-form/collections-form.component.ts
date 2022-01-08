@@ -47,6 +47,7 @@ export class CollectionsFormComponent implements OnInit, OnDestroy {
   }
   openDialog() {
     this.isNew = true;
+    this.clearSelect();
     this.form.reset();
     this.materialService.openDialog(this.dialogRef);
   }
@@ -88,7 +89,6 @@ export class CollectionsFormComponent implements OnInit, OnDestroy {
         },
         () => {
           this.materialService.closeDialog();
-          this.clearSelect();
           this.form.enable();
         }
       );
@@ -107,7 +107,6 @@ export class CollectionsFormComponent implements OnInit, OnDestroy {
         },
         () => {
           this.materialService.closeDialog();
-          this.clearSelect();
           this.form.enable();
         }
       );

@@ -8,6 +8,10 @@ const groupSchema = new Schema({
     required: true,
     unique: true,
   },
+  ParentId: {
+    ref: "units",
+    type: Schema.Types.ObjectId,
+  },
 });
 
 module.exports = mongoose.model("groups", groupSchema);

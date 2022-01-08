@@ -1,20 +1,27 @@
 const Group = require("../models/Group");
 const errorHandler = require("../utils/errorHandler");
 
-module.exports.getAll = async (request, response) => {
-  // получить все типы устройств
+// module.exports.getAll = async (request, response) => {
+//   // получить все типы устройств
+//   try {
+//     const groups = await Group.find({});
+//     response.status(200).json(groups);
+//   } catch (e) {
+//     errorHandler(response, e);
+//   }
+// };
+module.exports.getById = async (request, response) => {
   try {
-    const groups = await Group.find({});
+    const groups = await Group.find({
+      ParentId: request.params.ParentId,
+    });
     response.status(200).json(groups);
   } catch (e) {
     errorHandler(response, e);
   }
 };
-module.exports.getById = async (request, response) => {
-  // Получить тип девайся
-};
 module.exports.create = async (request, response) => {
-  // Создать тип устройства
+  // Создать отдел
   isDublicated = false;
   const groups = await Group.find({});
   groups.forEach(group => {
@@ -28,7 +35,7 @@ module.exports.create = async (request, response) => {
     try {
       const group = await new Group({
         name: request.body.name,
-        unit: request.body.parent,
+        ParentId: request.body.ParentId,
       }).save();
       response.status(201).json(group);
     } catch (e) {

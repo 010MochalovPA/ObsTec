@@ -1,12 +1,11 @@
 import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { Collection, CollectionChild, CollectionsList, CollectionsListChild } from 'src/app/shared/interfaces';
+import { Collection, CollectionChild, CollectionsListChild } from 'src/app/shared/interfaces';
 import { MaterialService } from 'src/app/shared/classes/material.service';
 import { CollectionsService } from 'src/app/shared/services/collections.service';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { ThrowStmt } from '@angular/compiler';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -50,6 +49,7 @@ export class CollectionsFormChildComponent implements OnInit, OnDestroy {
   }
   openDialog() {
     this.isNew = true;
+    this.clearSelect();
     this.form.reset();
     this.materialService.openDialog(this.dialogRef);
   }
@@ -93,7 +93,6 @@ export class CollectionsFormChildComponent implements OnInit, OnDestroy {
         },
         () => {
           this.materialService.closeDialog();
-          this.clearSelect();
           this.form.enable();
         }
       );
@@ -112,7 +111,6 @@ export class CollectionsFormChildComponent implements OnInit, OnDestroy {
         },
         () => {
           this.materialService.closeDialog();
-          this.clearSelect();
           this.form.enable();
         }
       );
