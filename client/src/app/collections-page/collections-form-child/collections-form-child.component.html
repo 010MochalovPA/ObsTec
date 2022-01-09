@@ -59,12 +59,13 @@
 
       <mat-card-content>
         <mat-form-field style="width: 100%; font-size: 14px" appearance="fill">
-          <mat-label>{{ collection.name }}</mat-label>
+          <mat-label>{{ collection.parent.name }}</mat-label>
           <mat-select [value]="selectedParent" formControlName="parent" [errorStateMatcher]="matcher">
             <mat-option *ngFor="let element of parentData" [value]="element._id">{{ element.name }}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field style="width: 100%" appearance="fill">
+          <mat-label>{{ collection.name }}</mat-label>
           <input formControlName="name" [errorStateMatcher]="matcher" matInput placeholder="Введите название" />
           <mat-error *ngIf="form.controls['name'].hasError('required')"> Поле не может быть <strong>пустым</strong> </mat-error>
         </mat-form-field>

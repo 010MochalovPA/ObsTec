@@ -31,6 +31,7 @@ export class CollectionsPageComponent implements OnInit {
       if ($event.tab.textLabel == child.collection.title) {
         child.clearSelect();
         child.ngOnInit();
+        child.form.reset();
         if (child.collection.parent) {
           child.clearParent();
         }
