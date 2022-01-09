@@ -53,7 +53,6 @@ export class CollectionsFormComponent implements OnInit, OnDestroy {
   }
   closeDialog() {
     this.materialService.closeDialog();
-    this.form.reset();
     this.clearSelect();
   }
   ngOnDestroy(): void {
@@ -147,7 +146,6 @@ export class CollectionsFormComponent implements OnInit, OnDestroy {
   }
   clearSelect() {
     this.selectedRow = null;
-    this.form.reset();
     this.filterValue = '';
     this.dataSource.filter = this.filterValue.trim().toLowerCase();
   }

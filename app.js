@@ -12,6 +12,7 @@ const deviceTypeRoutes = require("./routes/devicetype");
 const vendorRoutes = require("./routes/vendor");
 const unitRoutes = require("./routes/unit");
 const groupRoutes = require("./routes/group");
+const partRoutes = require("./routes/part");
 
 const app = express();
 
@@ -38,4 +39,5 @@ app.use("/api/devicetype", deviceTypeRoutes);
 app.use("/api/vendor", vendorRoutes);
 app.use("/api/unit", unitRoutes);
 app.use("/api/group", groupRoutes);
+app.use("/api/part", partRoutes);
 module.exports = app;

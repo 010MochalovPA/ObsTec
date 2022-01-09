@@ -12,7 +12,6 @@ export class TechLayoutComponent implements OnInit {
     { url: '/audit/collections', name: 'Справочники', disabled: false },
     { url: '/audit/persons', name: 'Сотрудники', disabled: true },
     { url: '/audit/ipaddresses', name: 'IP-адреса', disabled: true },
-    { url: '/audit/spares', name: 'Запасные части', disabled: true },
   ];
   constructor() {}
 

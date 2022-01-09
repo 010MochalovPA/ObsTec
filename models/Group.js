@@ -1,3 +1,4 @@
+// Отделы
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
@@ -9,6 +10,7 @@ const groupSchema = new Schema({
     unique: true,
   },
   ParentId: {
+    // связь с управленим
     ref: "units",
     type: Schema.Types.ObjectId,
   },

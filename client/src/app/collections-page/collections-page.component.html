@@ -1,8 +1,8 @@
-<mat-tab-group (selectedTabChange)="clearSelect($event)" animationDuration="400ms">
+<mat-tab-group #tabGroup [(selectedIndex)]="selectedIdx" (selectedTabChange)="clearSelect($event)" animationDuration="400ms">
   <mat-tab *ngFor="let collection of collectionsItemsBasic" [label]="collection.title">
     <app-collections-form #collectionItem [collection]="collection"></app-collections-form>
   </mat-tab>
   <mat-tab *ngFor="let collectionChild of collectionsItemsChild" [label]="collectionChild.title">
-    <app-collections-form-child #collectionItem [collection]="collectionChild"></app-collections-form-child>
+    <app-collections-form-child (selectedIndex)="changeTab($event)" #collectionItem [collection]="collectionChild"></app-collections-form-child>
   </mat-tab>
 </mat-tab-group>

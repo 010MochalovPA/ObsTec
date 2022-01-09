@@ -44,5 +44,6 @@ export interface CollectionsListChild {
     title: string;
     name: string;
     url: string;
+    parentIndex: number;
   };
 }

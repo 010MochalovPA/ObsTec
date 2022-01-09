@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Collection, CollectionChild, CollectionsListChild } from 'src/app/shared/interfaces';
@@ -21,10 +21,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class CollectionsFormChildComponent implements OnInit, OnDestroy {
   @Input() collection!: CollectionsListChild;
 
+  @Output() selectedIndex = new EventEmitter();
+
   @ViewChild(MatTable) table!: MatTable<Collection[]>;
   @ViewChild('collectionsDialog') dialogRef!: TemplateRef<any>;
   @ViewChild(MatSort) sort!: MatSort;
   form: FormGroup = new FormGroup({
+    parent: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required]),
   });
 
@@ -50,12 +53,16 @@ export class CollectionsFormChildComponent implements OnInit, OnDestroy {
   openDialog() {
     this.isNew = true;
     this.clearSelect();
-    this.form.reset();
     this.materialService.openDialog(this.dialogRef);
+    this.form.patchValue({
+      parent: this.selectedParent,
+      name: '',
+    });
+    console.log(this.selectedParent);
+    console.log(this.form);
   }
   closeDialog() {
     this.materialService.closeDialog();
-    this.form.reset();
     this.clearSelect();
   }
   ngOnDestroy(): void {
@@ -77,15 +84,17 @@ export class CollectionsFormChildComponent implements OnInit, OnDestroy {
     this.form.disable();
     const newItem: CollectionChild = {
       name: this.form.value.name,
-      ParentId: this.selectedParent!,
+      ParentId: this.form.value.parent,
     };
     if (this.isNew) {
       this.collectionsService.createChild(this.collection.url, newItem).subscribe(
         (dataItem) => {
           this.materialService.openSnackBar(`${this.collection.name} ${dataItem.name} создан!`);
-          this.collectionData.push(dataItem);
-          this.dataSource.data = this.collectionData;
-          this.table.renderRows();
+          if (this.form.value.parent === this.selectedParent) {
+            this.collectionData.push(dataItem);
+            this.dataSource.data = this.collectionData;
+            this.table.renderRows();
+          }
         },
         (error) => {
           this.materialService.openSnackBar(error.error.message);
@@ -100,9 +109,15 @@ export class CollectionsFormChildComponent implements OnInit, OnDestroy {
       this.collectionsService.updateChild(this.collection.url, newItem, this.selectedRow?._id).subscribe(
         (dataItem) => {
           this.materialService.openSnackBar(`${this.collection.name} ${dataItem.name} изменен!`);
-          const index = this.collectionData.findIndex((item) => item._id === this.selectedRow?._id);
-          this.collectionData[index] = dataItem;
-          this.dataSource.data = this.collectionData;
+          const index = this.collectionData.findIndex((item) => item._id === this.selectedRow!._id);
+          if (this.form.value.parent === this.selectedParent) {
+            this.collectionData[index] = dataItem;
+            this.dataSource.data = this.collectionData;
+          } else {
+            this.collectionData.splice(index, 1);
+            this.dataSource.data = this.collectionData;
+            this.clearSelect();
+          }
           this.table.renderRows();
         },
         (error) => {
@@ -119,6 +134,7 @@ export class CollectionsFormChildComponent implements OnInit, OnDestroy {
   onEdit() {
     this.isNew = false;
     this.form.patchValue({
+      parent: this.selectedParent,
       name: this.selectedRow!.name,
     });
     this.materialService.openDialog(this.dialogRef);
@@ -151,11 +167,13 @@ export class CollectionsFormChildComponent implements OnInit, OnDestroy {
   }
   clearSelect() {
     this.selectedRow = null;
-    this.form.reset();
     this.filterValue = '';
     this.dataSource.filter = this.filterValue.trim().toLowerCase();
   }
   clearParent() {
     this.selectedParent = '';
+  }
+  emitIndex() {
+    this.selectedIndex.emit(this.collection.parent.parentIndex);
   }
 }

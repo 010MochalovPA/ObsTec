@@ -1,3 +1,13 @@
 .main-table {
   height: 610px;
 }
+
+.parent-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.parent-button {
+  margin-top: -15px;
+  margin-right: 10px;
+}

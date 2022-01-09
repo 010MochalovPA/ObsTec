@@ -1,4 +1,5 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { MatTabGroup } from '@angular/material/tabs';
 import { CollectionsList, CollectionsListChild } from '../shared/interfaces';
 
 @Component({
@@ -9,14 +10,16 @@ import { CollectionsList, CollectionsListChild } from '../shared/interfaces';
 export class CollectionsPageComponent implements OnInit {
   @ViewChildren('collectionItem')
   childComponents!: QueryList<any>;
-
+  @ViewChild('tabGroup', { static: false }) tab?: MatTabGroup;
+  selectedIdx = 0;
   collectionsItemsBasic: CollectionsList[] = [
-    { title: 'Производители', name: 'Производитель', url: 'vendor' },
-    { title: 'Типы устройств', name: 'Тип устройства', url: 'devicetype' },
-    { title: 'Управления ПФР', name: 'Управление ПФР', url: 'unit' },
+    { title: 'Производители', name: 'Производитель', url: 'vendor' }, // 0
+    { title: 'Типы устройств', name: 'Тип устройства', url: 'devicetype' }, // 1
+    { title: 'Запасные части', name: 'Запасная часть', url: 'part' }, // 2
+    { title: 'Управления ПФР', name: 'Управление ПФР', url: 'unit' }, // 3
   ];
   collectionsItemsChild: CollectionsListChild[] = [
-    { title: 'Отделы', name: 'Отдел', url: 'group', parent: { title: 'Управления ПФР', name: 'Управление ПФР', url: 'unit' } },
+    { title: 'Отделы', name: 'Отдел', url: 'group', parent: { title: 'Управления ПФР', name: 'Управление ПФР', url: 'unit', parentIndex: 3 } },
     // { title: 'Модели', name: 'Модель', url: 'model', parent: { title: 'Производители', name: 'Производитель', url: 'vendor' } },
   ];
   constructor() {}
@@ -33,5 +36,8 @@ export class CollectionsPageComponent implements OnInit {
         }
       }
     });
+  }
+  changeTab($event: number) {
+    this.selectedIdx = $event;
   }
 }
