@@ -21,7 +21,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class CollectionsFormChildComponent implements OnInit, OnDestroy {
   @Input() collection!: CollectionsListChild;
 
-  @Output() selectedIndex = new EventEmitter();
 
   @ViewChild(MatTable) table!: MatTable<Collection[]>;
   @ViewChild('collectionsDialog') dialogRef!: TemplateRef<any>;
@@ -54,6 +53,7 @@ export class CollectionsFormChildComponent implements OnInit, OnDestroy {
     this.isNew = true;
     this.clearSelect();
     this.materialService.openDialog(this.dialogRef);
+    this.form.reset();
     this.form.patchValue({
       parent: this.selectedParent,
       name: '',
@@ -173,7 +173,5 @@ export class CollectionsFormChildComponent implements OnInit, OnDestroy {
   clearParent() {
     this.selectedParent = '';
   }
-  emitIndex() {
-    this.selectedIndex.emit(this.collection.parent.parentIndex);
-  }
+ 
 }

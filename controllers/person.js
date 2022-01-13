@@ -1,9 +1,9 @@
 module.exports.getAll = async (request, response) => {
-  response.status(200).json({ getAll: true });
+  // response.status(200).json({ getAll: true });
 };
 
 module.exports.create = async (request, response) => {
-  response.status(200).json({ CreatePerson: true });
+  // response.status(200).json({ CreatePerson: true });
 };
 
 module.exports.getById = async (request, response) => {

@@ -1,14 +1,12 @@
 <div class="content">
   <div class="parent-row">
-    <mat-form-field style="width: 93%; font-size: 14px" appearance="fill">
+    <mat-form-field style="width: 100%; font-size: 14px" appearance="fill">
       <mat-label>Выберите {{ collection.parent.name }}</mat-label>
       <mat-select [disabled]="isLoading" (selectionChange)="onRefresh()" [(ngModel)]="selectedParent">
         <mat-option *ngFor="let element of parentData" [value]="element._id">{{ element.name }}</mat-option>
       </mat-select>
     </mat-form-field>
-    <button class="parent-button" mat-mini-fab (click)="emitIndex()" color="primary">
-      <mat-icon>add</mat-icon>
-    </button>
+    
   </div>
 
   <div style="margin-top: -20px" class="setting-menu">

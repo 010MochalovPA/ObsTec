@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "obstec": {
+      "hosting": {
+        "client": [
+          "obstec"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "obstec"
+  }
+}

@@ -38,7 +38,5 @@ export class CollectionsPageComponent implements OnInit {
       }
     });
   }
-  changeTab($event: number) {
-    this.selectedIdx = $event;
-  }
+ 
 }

@@ -3,6 +3,9 @@
     <app-collections-form #collectionItem [collection]="collection"></app-collections-form>
   </mat-tab>
   <mat-tab *ngFor="let collectionChild of collectionsItemsChild" [label]="collectionChild.title">
-    <app-collections-form-child (selectedIndex)="changeTab($event)" #collectionItem [collection]="collectionChild"></app-collections-form-child>
+    <app-collections-form-child  #collectionItem [collection]="collectionChild"></app-collections-form-child>
+  </mat-tab>
+  <mat-tab label="Адреса">
+    <app-collections-form-adress></app-collections-form-adress>
   </mat-tab>
 </mat-tab-group>

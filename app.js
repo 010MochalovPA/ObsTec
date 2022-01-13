@@ -7,8 +7,8 @@ const passport = require("passport");
 
 const authRoutes = require("./routes/auth");
 const personRoutes = require("./routes/person");
-const deviceRoutes = require("./routes/device");
 const deviceTypeRoutes = require("./routes/devicetype");
+const adressRoutes = require("./routes/adress");
 const vendorRoutes = require("./routes/vendor");
 const unitRoutes = require("./routes/unit");
 const groupRoutes = require("./routes/group");
@@ -34,10 +34,12 @@ app.use(bodyParser.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/person", personRoutes);
-app.use("/api/device", deviceRoutes);
+// app.use("/api/device", deviceRoutes);
 app.use("/api/devicetype", deviceTypeRoutes);
 app.use("/api/vendor", vendorRoutes);
 app.use("/api/unit", unitRoutes);
 app.use("/api/group", groupRoutes);
 app.use("/api/part", partRoutes);
+app.use("/api/adress", adressRoutes);
+
 module.exports = app;
