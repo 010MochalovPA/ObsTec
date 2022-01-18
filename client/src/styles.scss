@@ -169,7 +169,7 @@ mat-dialog-container {
   margin: 0 auto;
   button {
     margin: 0px !important;
-    width: 200px;
+    width: 190px;
     padding: 0;
     &:first-child {
       margin-right: 20px !important;
@@ -183,4 +183,8 @@ mat-dialog-container {
 
 table {
   width: 100%;
+}
+
+.dialog {
+  width: 404px;
 }

@@ -36,6 +36,13 @@ export interface CollectionsList {
   url: string;
 }
 
+export interface CollectionAdress {
+  postalCode: string;
+  locality: string;
+  street: string;
+  number: string;
+  _id?: string;
+}
 export interface CollectionsListChild {
   title: string;
   name: string;
