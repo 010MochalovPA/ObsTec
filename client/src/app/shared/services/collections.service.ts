@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { Collection, CollectionAdress, CollectionChild, Message } from '../interfaces';
+import { Collection, CollectionAddress, CollectionChild, Message } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +14,8 @@ export class CollectionsService {
     return this.http.get<Collection[]>(`/api/${collection}`);
   }
 
-  fetchAdress(): Observable<CollectionAdress[]> {
-    return this.http.get<CollectionAdress[]>(`/api/adress`);
+  fetchAddress(): Observable<CollectionAddress[]> {
+    return this.http.get<CollectionAddress[]>(`/api/address`);
   }
 
   fetchChild(collection: string, parentId: string): Observable<CollectionChild[]> {
@@ -26,8 +26,8 @@ export class CollectionsService {
     return this.http.post<Collection>(`/api/${collection}`, item);
   }
 
-  createAdress(item: CollectionAdress): Observable<CollectionAdress> {
-    return this.http.post<CollectionAdress>(`/api/adress`, item);
+  createAddress(item: CollectionAddress): Observable<CollectionAddress> {
+    return this.http.post<CollectionAddress>(`/api/address`, item);
   }
 
   createChild(collection: string, item: CollectionChild): Observable<CollectionChild> {
@@ -37,14 +37,14 @@ export class CollectionsService {
   delete(collection: string, item: Collection): Observable<Message> {
     return this.http.delete<Message>(`/api/${collection}/${item._id}`);
   }
-  deleteAdress(item: CollectionAdress): Observable<Message> {
-    return this.http.delete<Message>(`/api/adress/${item._id}`);
+  deleteAddress(item: CollectionAddress): Observable<Message> {
+    return this.http.delete<Message>(`/api/address/${item._id}`);
   }
   update(collection: string, item: Collection, itemID: string | undefined): Observable<Collection> {
     return this.http.patch<Collection>(`api/${collection}/${itemID}`, item);
   }
-  updateAdress(item: CollectionAdress, itemID: string | undefined): Observable<CollectionAdress> {
-    return this.http.patch<CollectionAdress>(`api/adress/${itemID}`, item);
+  updateAddress(item: CollectionAddress, itemID: string | undefined): Observable<CollectionAddress> {
+    return this.http.patch<CollectionAddress>(`api/address/${itemID}`, item);
   }
   updateChild(collection: string, item: Collection, itemID: string | undefined): Observable<CollectionChild> {
     return this.http.patch<CollectionChild>(`api/${collection}/${itemID}`, item);

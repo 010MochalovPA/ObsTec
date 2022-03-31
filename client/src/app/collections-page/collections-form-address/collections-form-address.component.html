@@ -21,7 +21,7 @@
     <div class="mat-elevation-z8">
       <div class="table-container-collections">
         <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort (matSortChange)="sortData()" matSortDirection="desc" class="mat-elevation-z8">
-          <ng-container matColumnDef="adress">
+          <ng-container matColumnDef="address">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Адрес</th>
             <td mat-cell *matCellDef="let element">{{ element.postalCode + ", " + element.locality + ", ул. " + element.street + ", д. " + element.number }}</td>
             <td mat-footer-cell *matFooterCellDef>Всего: {{ dataSource ? dataSource.filteredData.length : collectionData.length }}</td>
@@ -39,7 +39,7 @@
   </div>
 </div>
 
-<ng-template #adressDialog>
+<ng-template #addressDialog>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-card class="dialog">
       <mat-card-header style="margin-bottom: 30px">

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { Collection, CollectionAdress, CollectionsList } from 'src/app/shared/interfaces';
+import { CollectionAddress } from 'src/app/shared/interfaces';
 import { MaterialService } from 'src/app/shared/classes/material.service';
 import { CollectionsService } from 'src/app/shared/services/collections.service';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
@@ -14,13 +14,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 @Component({
-  selector: 'app-collections-form-adress',
-  templateUrl: './collections-form-adress.component.html',
-  styleUrls: ['./collections-form-adress.component.scss'],
+  selector: 'app-collections-form-address',
+  templateUrl: './collections-form-address.component.html',
+  styleUrls: ['./collections-form-address.component.scss'],
 })
-export class CollectionsFormAdressComponent implements OnInit, OnDestroy {
-  @ViewChild(MatTable) table!: MatTable<CollectionAdress[]>;
-  @ViewChild('adressDialog') dialogRef!: TemplateRef<any>;
+export class CollectionsFormAddressComponent implements OnInit, OnDestroy {
+  @ViewChild(MatTable) table!: MatTable<CollectionAddress[]>;
+  @ViewChild('addressDialog') dialogRef!: TemplateRef<any>;
   @ViewChild(MatSort) sort!: MatSort;
   form: FormGroup = new FormGroup({
     postalCode: new FormControl('', [Validators.required]),
@@ -29,18 +29,18 @@ export class CollectionsFormAdressComponent implements OnInit, OnDestroy {
     number: new FormControl('', [Validators.required]),
   });
   isNew = true;
-  collectionData: CollectionAdress[] = [];
+  collectionData: CollectionAddress[] = [];
   isLoading = false;
-  selectedRow!: CollectionAdress | null;
+  selectedRow!: CollectionAddress | null;
   filterValue = '';
-  displayedColumns: string[] = ['adress'];
+  displayedColumns: string[] = ['address'];
   dataSource = new MatTableDataSource(this.collectionData);
   matcher = new MyErrorStateMatcher();
   constructor(private collectionsService: CollectionsService, private materialService: MaterialService) {}
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.collectionsService.fetchAdress().subscribe((data) => {
+    this.collectionsService.fetchAddress().subscribe((data) => {
       this.isLoading = false;
       this.collectionData = data;
       this.dataSource.data = this.collectionData;
@@ -72,14 +72,14 @@ export class CollectionsFormAdressComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.form.disable();
-    const newItem: CollectionAdress = {
+    const newItem: CollectionAddress = {
       postalCode: this.form.value.postalCode,
       locality: this.form.value.locality,
       street: this.form.value.street,
       number: this.form.value.number,
     };
     if (this.isNew) {
-      this.collectionsService.createAdress(newItem).subscribe(
+      this.collectionsService.createAddress(newItem).subscribe(
         (dataItem) => {
           this.materialService.openSnackBar(`Адрес ${dataItem.locality}, ${dataItem.street}, ${dataItem.number} создан!`);
           this.collectionData.push(dataItem);
@@ -96,7 +96,7 @@ export class CollectionsFormAdressComponent implements OnInit, OnDestroy {
         }
       );
     } else {
-      this.collectionsService.updateAdress(newItem, this.selectedRow?._id).subscribe(
+      this.collectionsService.updateAddress(newItem, this.selectedRow?._id).subscribe(
         (dataItem) => {
           this.materialService.openSnackBar(`Адрес ${dataItem.locality}, ${dataItem.street}, ${dataItem.number} изменен!`);
           const index = this.collectionData.findIndex((item) => item._id === this.selectedRow?._id);
@@ -128,7 +128,7 @@ export class CollectionsFormAdressComponent implements OnInit, OnDestroy {
   onDelete() {
     const decision = window.confirm(`Удалить ${this.selectedRow!.locality}, ${this.selectedRow!.street}, ${this.selectedRow!.number} из справочника Адресов?`);
     if (decision) {
-      this.collectionsService.deleteAdress(this.selectedRow!).subscribe(
+      this.collectionsService.deleteAddress(this.selectedRow!).subscribe(
         (response) => {
           const index = this.collectionData.findIndex((item) => item._id === this.selectedRow!._id);
           this.collectionData.splice(index, 1);
@@ -144,7 +144,7 @@ export class CollectionsFormAdressComponent implements OnInit, OnDestroy {
   }
   onRefresh() {
     this.isLoading = true;
-    this.collectionsService.fetchAdress().subscribe((data) => {
+    this.collectionsService.fetchAddress().subscribe((data) => {
       this.isLoading = false;
       this.collectionData = data;
       this.dataSource.data = this.collectionData;

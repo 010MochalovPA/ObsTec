@@ -27,7 +27,7 @@ import { TechFormComponent } from './tech-page/tech-form/tech-form.component';
 import { CollectionsPageComponent } from './collections-page/collections-page.component';
 import { CollectionsFormComponent } from './collections-page/collections-form/collections-form.component';
 import { CollectionsFormChildComponent } from './collections-page/collections-form-child/collections-form-child.component';
-import { CollectionsFormAdressComponent } from './collections-page/collections-form-adress/collections-form-adress.component';
+import { CollectionsFormAddressComponent } from './collections-page/collections-form-address/collections-form-address.component';
 
 @NgModule({
   imports: [BrowserModule, CommonModule, AppRoutingModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule, HttpClientModule, MaterialModule],
@@ -46,7 +46,7 @@ import { CollectionsFormAdressComponent } from './collections-page/collections-f
     CollectionsPageComponent,
     CollectionsFormComponent,
     CollectionsFormChildComponent,
-    CollectionsFormAdressComponent,
+    CollectionsFormAddressComponent,
   ],
 
   providers: [

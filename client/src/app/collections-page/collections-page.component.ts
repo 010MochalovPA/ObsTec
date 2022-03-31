@@ -19,7 +19,7 @@ export class CollectionsPageComponent implements OnInit {
     { title: 'Управления ПФР', name: 'Управление ПФР', url: 'unit' }, // 3
   ];
   collectionsItemsChild: CollectionsListChild[] = [
-    { title: 'Отделы', name: 'Отдел', url: 'group', parent: { title: 'Управления ПФР', name: 'Управление ПФР', url: 'unit', parentIndex: 3 } },
+    { title: 'Отделы', name: 'Отдел', url: 'group', parent: { title: 'Управления ПФР', name: 'Управление ПФР', url: 'unit' } },
     // { title: 'Модели', name: 'Модель', url: 'model', parent: { title: 'Производители', name: 'Производитель', url: 'vendor' } },
   ];
   constructor() {}
@@ -38,5 +38,4 @@ export class CollectionsPageComponent implements OnInit {
       }
     });
   }
- 
 }

@@ -37,6 +37,7 @@ module.exports.create = async (request, response) => {
         name: request.body.name,
         ParentId: request.body.ParentId,
       }).save();
+      console.log(request.body.name);
       response.status(201).json(group);
     } catch (e) {
       errorHandler(response, e);

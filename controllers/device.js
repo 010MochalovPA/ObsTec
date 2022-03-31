@@ -5,12 +5,8 @@ const errorHandler = require("../utils/errorHandler");
 module.exports.getAll = async (request, response) => {
   // Получение всех устройств
   try {
-    const types = await DeviceType.find({});
+    console.log('getAll');
     const devices = await Device.find({});
-    devices.map(item => {
-      item.deviceTypeName = types.find(type => type._id.equals(item.deviceTypeId)).name;
-      return item;
-    });
     response.status(200).json(devices);
   } catch (e) {
     errorHandler(response, e);
@@ -59,7 +55,10 @@ module.exports.create = async (request, response) => {
       deviceModel: request.body.deviceModel,
       serialNumber: request.body.serialNumber,
       inventoryNumber: request.body.inventoryNumber,
+      unitId: request.body.unitId,
+      groupId: request.body.groupId,
       ipAdress: request.body.ipAdress,
+      isRepair: request.body.isRepair,
       personId: request.body.personId,
     }).save();
     response.status(201).json(device);

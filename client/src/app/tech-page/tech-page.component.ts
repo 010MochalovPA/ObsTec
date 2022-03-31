@@ -17,7 +17,7 @@ export class TechPageComponent implements OnInit, OnDestroy {
   filterValue = '';
   selectedRow = '';
   devices: Device[] = [];
-  displayedColumns: string[] = ['deviceTypeName', 'deviceModel', 'serialNumber', 'inventoryNumber', 'ipAdress'];
+  displayedColumns: string[] = ['deviceTypeName', 'deviceModel', 'serialNumber', 'inventoryNumber','unit','group', 'ipAdress'];
   dataSource: any;
 
   constructor(private techService: TechService) {}

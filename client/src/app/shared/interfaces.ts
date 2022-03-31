@@ -7,10 +7,12 @@ export interface User {
 export interface Device {
   deviceTypeId: string;
   deviceModel: string;
-  deviceTypeName: string;
   serialNumber: string;
-  ipAdress?: string;
   inventoryNumber: string;
+  unitId: string;
+  groupId: string;
+  ipAddress?: string;
+  isRepair: boolean;
   PersonId?: string;
   _id?: string;
 }
@@ -36,7 +38,7 @@ export interface CollectionsList {
   url: string;
 }
 
-export interface CollectionAdress {
+export interface CollectionAddress {
   postalCode: string;
   locality: string;
   street: string;
@@ -51,6 +53,5 @@ export interface CollectionsListChild {
     title: string;
     name: string;
     url: string;
-    parentIndex: number;
   };
 }

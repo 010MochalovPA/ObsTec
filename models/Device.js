@@ -7,10 +7,6 @@ const deviceSchema = new Schema({
     ref: "devicetypes",
     type: Schema.Types.ObjectId,
   },
-  deviceTypeName: {
-    type: String,
-    required: false,
-  },
   deviceModel: {
     type: String,
     required: true,
@@ -18,14 +14,29 @@ const deviceSchema = new Schema({
   serialNumber: {
     type: String,
     required: true,
+    unique: true,
   },
   inventoryNumber: {
     type: Number,
     required: true,
   },
-  ipAdress: {
+  unitId:{
+    ref: "units",
+    type: Schema.Types.ObjectId,
+    required: true,
+  },
+  groupId:{
+    ref: "groups",
+    type: Schema.Types.ObjectId,
+    required: true,
+  },
+  ipAddress: {
     type: String,
     required: false,
+  },
+  isRepair:{
+    type: Boolean,
+    required: true,
   },
   personId: {
     ref: "persons",
